@@ -134,11 +134,6 @@ function Preview:render()
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
 	}, {
-		UIPadding = e("UIPadding", {
-			PaddingLeft = UDim.new(0, 5),
-			PaddingTop = UDim.new(0, 5),
-		}),
-
 		Preview = e("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
