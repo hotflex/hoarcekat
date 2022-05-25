@@ -51,6 +51,7 @@ local function IconListItem(props)
 					Size = UDim2.new(1, -BAR_HEIGHT, 0, BAR_HEIGHT),
 					Text = props.Text,
 					TextColor3 = theme:GetColor("BrightText", "Default"),
+					TextSize = 16,
 					TextXAlignment = Enum.TextXAlignment.Left,
 				}),
 			})
