@@ -53,6 +53,7 @@ local function IconListItem(props)
 					TextColor3 = theme:GetColor("BrightText", "Default"),
 					TextSize = 16,
 					TextXAlignment = Enum.TextXAlignment.Left,
+					Font = Enum.Font.SourceSans,
 				}),
 			})
 		end,
