@@ -16,17 +16,12 @@ local Preview = Roact.PureComponent:extend("Preview")
 
 function Preview:init()
 	self.previewRef = Roact.createRef()
+	self.topLevelFrameRef = Roact.createRef()
 
 	self.monkeyRequireCache = {}
 	self.monkeyRequireMaid = Maid.new()
 
 	self.monkeyGlobalTable = {}
-
-	local display = Instance.new("ScreenGui")
-	display.Name = "HoarcekatDisplay"
-	self.display = display
-
-	self.expand = false
 
 	self.monkeyRequire = function(otherScript)
 		if self.monkeyRequireCache[otherScript] then
@@ -65,13 +60,6 @@ function Preview:init()
 		if preview then
 			Selection:Set({ preview })
 		end
-	end
-
-	self.expandSelection = function()
-		self.expand = not self.expand
-		self.display.Parent = self.expand and CoreGui or nil
-
-		self:refreshPreview()
 	end
 end
 
@@ -115,7 +103,7 @@ function Preview:refreshPreview()
 		end
 
 		local execOk, cleanup = xpcall(function()
-			return result(self.expand and self.display or self.previewRef:getValue())
+			return result(self.previewRef:getValue(), self.props.modalFrame)
 		end, debug.traceback)
 
 		if not execOk then
@@ -137,6 +125,7 @@ function Preview:render()
 		Preview = e("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
+			ZIndex = 1,
 			[Roact.Ref] = self.previewRef,
 		}),
 
@@ -150,21 +139,6 @@ function Preview:render()
 			Button = e(FloatingButton, {
 				Activated = self.openSelection,
 				Image = Assets.preview,
-				ImageSize = UDim.new(0, 24),
-				Size = UDim.new(0, 40),
-			}),
-		}),
-
-		ExpandButton = e("Frame", {
-			AnchorPoint = Vector2.new(1, 1),
-			BackgroundTransparency = 1,
-			Position = UDim2.new(0.99, -45, 0.99),
-			Size = UDim2.fromOffset(40, 40),
-			ZIndex = 2,
-		}, {
-			Button = e(FloatingButton, {
-				Activated = self.expandSelection,
-				Image = "rbxasset://textures/ui/VR/toggle2D.png",
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),
 			}),
