@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Added modal frame that can be used to render top level elements like dropdown list.
 - Fixed story tree item's texts being too big.
+- Sidebar is now fixed size
 
 ### Changed
 - When a studio test is initiated, HoarceKat will no longer display an update message.

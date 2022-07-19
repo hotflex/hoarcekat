@@ -2,6 +2,8 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Roact = require(Hoarcekat.Vendor.Roact)
 
+local Constants = require(Hoarcekat.Plugin.Constants)
+
 local Preview = require(script.Parent.Preview)
 local Sidebar = require(script.Parent.Sidebar)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
@@ -37,7 +39,7 @@ function App:render()
 
 				Sidebar = e("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.fromScale(0.2, 1),
+					Size = UDim2.new(0, Constants.SIDEBAR_FIXED_WIDTH, 1, 0),
 					ZIndex = 3,
 				}, {
 					Sidebar = e(Sidebar),
@@ -47,7 +49,7 @@ function App:render()
 					AnchorPoint = Vector2.new(1, 0),
 					BackgroundTransparency = 1,
 					Position = UDim2.fromScale(1, 0),
-					Size = UDim2.fromScale(0.8, 1),
+					Size = UDim2.new(1, -Constants.SIDEBAR_FIXED_WIDTH, 1, 0),
 					ZIndex = 1,
 				}, {
 					Preview = e(Preview, {
